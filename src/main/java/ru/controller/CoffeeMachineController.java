@@ -1,30 +1,25 @@
-/*
 package ru.controller;
 
 import org.springframework.beans.factory.annotation.Autowired;
-*/
 /*import org.springframework.security.authentication.AuthenticationTrustResolver;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
-import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;*//*
+import org.springframework.security.web.authentication.rememberme.PersistentTokenBasedRememberMeServices;*/
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
-*/
-/*import ru.models.UserInfo;*//*
+/*import ru.models.UserInfo;*/
 
 import ru.models.coffeeMachine;
-*/
 /*import ru.service.UserProfileService;
-import ru.service.UserService;*//*
+import ru.service.UserService;*/
 
 import ru.service.coffeeMachineService;
 
-*/
 /*import javax.servlet.http.HttpServletRequest;
-import javax.servlet.http.HttpServletResponse;*//*
+import javax.servlet.http.HttpServletResponse;*/
 
 import javax.validation.Valid;
 import java.util.List;
@@ -35,24 +30,22 @@ public class CoffeeMachineController {
 
     @Autowired
     private coffeeMachineService coffeeMachineService;
+/*
 
-*/
-/*    @Autowired
+    @Autowired
     UserService userService;
 
     @Autowired
-    UserProfileService userProfileService;*//*
-
-
+    UserProfileService userProfileService;
 */
-/*    @Autowired
+
+
+    /*@Autowired
     PersistentTokenBasedRememberMeServices persistentTokenBasedRememberMeServices;
 
     @Autowired
-    AuthenticationTrustResolver authenticationTrustResolver;*//*
+    AuthenticationTrustResolver authenticationTrustResolver;
 
-*/
-/*
     @GetMapping("/login")
     public String welcomePage(){
         return "loginPage";
@@ -66,8 +59,8 @@ public class CoffeeMachineController {
     public String saveUser(@ModelAttribute("user") @Valid UserInfo user) {
         userService.saveUser(user);
         return "redirect:/login";
-    }*//*
-
+    }
+*/
 
     @GetMapping("/coffeeMachine/mainPage")
     public String main() {
@@ -132,10 +125,8 @@ public class CoffeeMachineController {
         coffeeMachineService.deleteCoffeeMachine(id);
         return "redirect:/coffeeMachine/mainPage";
     }
-}
 
-*/
-/*    @RequestMapping(value = "/logout", method = RequestMethod.GET)
+    /*@RequestMapping(value = "/logout", method = RequestMethod.GET)
     public String logoutPage(HttpServletRequest request, HttpServletResponse response) {
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         if (authentication != null) {
@@ -148,9 +139,8 @@ public class CoffeeMachineController {
     @RequestMapping(value = "/accessDenied", method = RequestMethod.GET)
     public String accessDenied() {
         return "accessDenied";
-    }
+    }*/
 
-}*//*
+}
 
 
-*/

@@ -1,16 +1,20 @@
 package ru.controller;
 
+import com.sun.org.apache.xpath.internal.operations.Mod;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
+import org.springframework.ui.Model;
+import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.util.UriComponentsBuilder;
 import ru.models.coffeeMachine;
 import ru.service.coffeeMachineService;
 
+import javax.validation.Valid;
 import java.beans.IntrospectionException;
 import java.util.List;
 
@@ -78,6 +82,50 @@ public class CoffeeMachineControllerRest {
         ModelAndView modelAndView = new ModelAndView();
         modelAndView.setViewName("main");
         return modelAndView;
+    }
+
+    @GetMapping("/coffeeMachine/index")
+    public ModelAndView listCoffeeMachine(Model model) {
+        List<coffeeMachine> coffeeMachineList = coffeeMachineService.findAll();
+        model.addAttribute("coffeeMachine", coffeeMachineList);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("index");
+        return modelAndView;
+    }
+
+    @GetMapping("/coffeeMachine/indexRequest")
+    public ModelAndView listCoffeeMachineIndexRequest(Model model) {
+        List<coffeeMachine> coffeeMachineList = coffeeMachineService.findAllReqest();
+        model.addAttribute("coffeeMachine", coffeeMachineList);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("indexReqest");
+        return modelAndView;
+    }
+
+    @GetMapping("/coffeeMachine/index/{id}")
+    public ModelAndView showOneCoffeeMachine(@PathVariable("id") int id, Model model) {
+        coffeeMachine coffeeMachine = coffeeMachineService.getCoffeeMachine(id);
+        model.addAttribute("coffeeMachine", coffeeMachine);
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("show");
+        return modelAndView;
+    }
+
+    @GetMapping("/coffeeMachine/new")
+    public ModelAndView saveCoffeeMachine(@ModelAttribute("coffeeMachine") coffeeMachine coffeeMachine) {
+        ModelAndView modelAndView = new ModelAndView();
+        modelAndView.setViewName("new");
+        return modelAndView;
+    }
+
+    @RequestMapping(value = "/coffeeMachine/mainPage", method = RequestMethod.POST)
+    public String create(@ModelAttribute("coffeeMachine") @Valid coffeeMachine coffeeMachine,
+                         BindingResult bindingResult) {
+        if (bindingResult.hasErrors())
+            return "new";
+
+        coffeeMachineService.saveCoffeeMachine(coffeeMachine);
+        return "redirect:/coffeeMachine/mainPage";
     }*/
 
 }
